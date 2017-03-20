@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<!-- ?xml-stylesheet type="text/xsl" href="http://ilcsoft.desy.de/marlin/marlin.xsl"? -->
+<!-- ?xml-stylesheet type="text/xsl" href="marlin.xsl"? -->
+
+<marlin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ilcsoft.desy.de/marlin/marlin.xsd">
+    <!--this just lists out the order processors will be run in,
+    in the event that there are several. In this case,
+    just the one -->
+	<execute>
+        <processor name="SPProcessor"/>
+    </execute>
+
+    <global>
+		<!--list your input files-->
+        <parameter name="LCIOInputFiles"> /home/ross.mccoy/SPAnalyzer/65DegreePions10000Events/20GeV_65_pions_10000events_reco.slcio </parameter>
+		
+		<!--how many events are you running over-->
+        <parameter name="MaxRecordNumber" value="300000" />  <!-- limit the number of processed records (run+evt): -->
+		
+		<!--skip the first N events if you want-->
+        <parameter name="SkipNEvents" value="0" />
+		
+		<!--I think this prevents the checkEvent function in the processor from running-->
+        <parameter name="SupressCheck" value="false" />
+		
+		<!--write permissions for the slcio file, maybe? I've never used this-->
+        <parameter name="AllowToModifyEvent" value="false" />
+		
+		<!--Set this depending on how much info you want dumped to the terminal-->
+        <parameter name="Verbosity" options="DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT"> DEBUG  </parameter>
+		
+		<!--I think this randomizes the order events are taken out of the input file-->
+        <parameter name="RandomSeed" value="1234567890" />
+		
+		<parameter name="GearXMLFile" value="../gear_sidv02.xml"/>
+    </global>
+	
+	<!-- this is where the input parameters for a specific processor are given-->
+    <processor name="SPProcessor" type="SPAnalysis">
+        <parameter name="CollectionName" type="string" lcioInType="MCParticle">MCParticle </parameter>
+		<parameter name="Verbosity" type="string">DEBUG </parameter>
+		<parameter name="ROOTFileName" type="string">20GeV_65_pions_10000events_reco.root</parameter>	
+		<parameter name="ParticleParameter" type="string">20GeV_Pion_SiD_o2_v02</parameter>
+		<parameter name="Multiplier" type="float">2.0</parameter>		
+    </processor>
+	
+	
+</marlin>

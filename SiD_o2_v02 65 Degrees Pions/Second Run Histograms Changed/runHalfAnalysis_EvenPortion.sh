@@ -1,0 +1,4 @@
+Marlin SPAnalysis_5GeV_pions_65Degrees.xml
+Marlin SPAnalysis_20GeV_pions_65Degrees.xml
+Marlin SPAnalysis_40GeV_pions_65Degrees.xml
+Marlin SPAnalysis_100GeV_pions_65Degrees.xml
